@@ -89,13 +89,33 @@ print json.__version__
 ##### 4.3. Аутентификация
 Если SSH-ключ отсутствует, то проходим по всему списку:
 4.3.1. GitHub --> Profile --> Settings --> SSH and GPG keys --> "Generating a new SSH key" --> Copy "ssh-keygen -t ed25519 -C ayaweb7@gmail.com"
-4.3.2. Terminal --> Paste --> Enter Password Two Times --> "eval "$(ssh-agent -s)"" --> "ssh-add c:/Users/Андрей/my_learning .ssh/id_ed25519"
+4.3.2. Terminal --> Paste --> Enter Password Two Times --> "eval "$(ssh-agent -s)"" --> "ssh-add C:/Users/User/my_learning/ .ssh/id_ed25519"
 4.3.3. Создать файл конфигурации .CONFIG: --> "touch ~/.ssh/config" (или открыть существующий "open ~/.ssh/config") --> внести изменения и сохранить
 4.3.4. Генерируем новый SSH-ключ: "clip < ~/.ssh/id_ed25519.pub"
 4.3.5. GitHub --> Profile --> Settings --> SSH and GPG keys --> New SSH Key --> Comment --> Paste --> ENTER --> ADD SSH KEY
 4.3.6. Testing your SSH connection: Terminal --> "ssh -T git@github.com"
 
 Если SSH-ключ уже существует, то пропускаем пункты, по созданию ключа: ... копируем, изменяем, сохраняем, проверяем.
+
+### **Итоговая последовательность команд**
+1. Запуск агента
+eval $(ssh-agent -s)
+
+2. Добавление ключа
+ssh-add ~/.ssh/id_rsa
+
+3. Проверка
+ssh-add -l
+ssh -T git@github.com
+
+4. Настройка Git
+git remote set-url origin git@github.com:ваш-логин/news_parser.git
+git remote add origin git@github.com:ayaweb7/news_parser.git
+git branch -M main
+git push -u origin main
+
+5. После этого `git push/pull` будет работать без пароля!
+
 
 ### : Terminal - Горячие клавиши:
 	cd ~ - Переход в домашнюю папку из любой текущей папки любого проекта
