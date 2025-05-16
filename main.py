@@ -1,5 +1,11 @@
 # Notebook news_parser.ipynb
-# C:\ProgramData\anaconda3\python.exe C:/Users/User/my_learning/parsing_cases/notebooks/parsing_news.py
+# C:\ProgramData\anaconda3\python.exe C:\Users\User\my_learning\news_parser\main.py
+# C:\ProgramData\anaconda3\python.exe C:\Users\User\my_learning\news_parser\run.bat
+
+# @echo off
+# cd C:\Users\User\my_learning\news_parser
+# call C:\Users\User\my_learning\news_parser\venv\Scripts\activate
+# python C:\Users\User\my_learning\news_parser\main.py
 
 # Загрузка библиотек
 # Для вспомогательных функций и основного парсера
@@ -42,8 +48,23 @@ import config
 """
 
 
-def test_parser():
-    print("Заголовок страницы:")
+# def test_parser():
+#    print("Заголовок страницы:")
 
-if __name__ == "__main__":
-    test_parser()
+# if __name__ == "__main__":
+#    test_parser()
+
+import telebot
+# для указание типов
+from telebot import types
+# токен лежит в файле config.py
+import config
+
+bot = telebot.TeleBot(config.token)
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    print(f"Получено сообщение: {message.text}")
+    bot.reply_to(message, message.text)
+
+print("Бот запущен!")
+bot.polling(none_stop=True)
